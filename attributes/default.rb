@@ -21,7 +21,7 @@ default['bind']['packages'] = %w(bind bind-utils bind-libs)
 default['bind']['vardir'] = '/var/named'
 default['bind']['sysconfdir'] = '/etc/named'
 default['bind']['conf_file'] = '/etc/named.conf'
-default['bind']['options_file'] = "#{node['bind']['sysconfdir']}/named.conf.options"
+default['bind']['options_file'] = "named.conf.options"
 default['bind']['views_file'] = "#{node['bind']['sysconfdir']}/named.views"
 default['bind']['service_name'] = 'named'
 default['bind']['user'] = 'named'
@@ -37,7 +37,7 @@ when 'debian'
   default['bind']['packages'] = %w(bind9 bind9utils)
   default['bind']['sysconfdir'] = '/etc/bind'
   default['bind']['conf_file'] = "#{node['bind']['sysconfdir']}/named.conf"
-  default['bind']['options_file'] = "#{node['bind']['sysconfdir']}/named.conf.options"
+  default['bind']['options_file'] = "named.conf.options"
   default['bind']['vardir'] = '/var/cache/bind'
   default['bind']['service_name'] = 'bind9'
   default['bind']['user'] = 'bind'
@@ -46,7 +46,7 @@ when 'debian'
 end
 
 # Files which should be included in named.conf
-default['bind']['included_files'] = %W(#{node['bind']['sysconfdir']}/named.rfc1912.zones #{node['bind']['options_file']})
+default['bind']['included_files'] = %W(named.rfc1912.zones #{node['bind']['options_file']})
 
 # These are var files referenced by our rfc1912 zone and root hints (named.ca) zone
 default['bind']['var_cookbook_files'] = %w(named.empty named.ca named.loopback named.localhost)
@@ -56,6 +56,10 @@ default['bind']['masters'] = []
 
 # Boolean to turn off/on IPV6 support
 default['bind']['ipv6_listen'] = false
+default['bind']['listen-on'] = []
+default['bind']['listen-on-v6'] = []
+default['bind']['listen-on-port'] = 53
+default['bind']['listen-on-v6-port'] = default['bind']['listen-on-port']
 
 # If this is a virtual machine, you need to use urandom as
 # any VM does not have a real CMOS clock for entropy.
@@ -76,6 +80,8 @@ default['bind']['acls'] = []
 default['bind']['allow-query'] = nil
 default['bind']['allow-query-cache'] = nil
 default['bind']['allow-recursion'] = nil
+default['bind']['allow-transfer'] = nil
+default['bind']['allow-notify'] = nil
 
 # Enable/disable recursion in options block. Enabled by default.
 default['bind']['recursion'] = true
