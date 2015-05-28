@@ -27,7 +27,7 @@ The net-ldap v0.2.2 Ruby gem is required for the ldap2zone recipe.
   - Search key for pulling split-domain ACLs out of `data_bags`
   - Defaults to internal-acl, and has no effect if you do not need ACLs.
 
-* `bind['acl']`
+* `bind['acls']`
   - An array node attribute which `data_bag` ACLs are pushed on to,
     and then passed to named.options template.
   - Default is an empty array.
