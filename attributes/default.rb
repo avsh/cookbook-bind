@@ -22,7 +22,6 @@ default['bind']['vardir'] = '/var/named'
 default['bind']['sysconfdir'] = '/etc/named'
 default['bind']['conf_file'] = '/etc/named.conf'
 default['bind']['options_file'] = "named.conf.options"
-default['bind']['views_file'] = "#{node['bind']['sysconfdir']}/named.views"
 default['bind']['service_name'] = 'named'
 default['bind']['user'] = 'named'
 default['bind']['group'] = 'named'
@@ -44,6 +43,8 @@ when 'debian'
   default['bind']['group'] = 'bind'
   default['bind']['rndc-key'] = "#{node['bind']['sysconfdir']}/rndc.key"
 end
+
+default['bind']['views_file'] = "#{node['bind']['sysconfdir']}/named.views"
 
 # Files which should be included in named.conf
 default['bind']['included_files'] = %W(named.rfc1912.zones #{node['bind']['options_file']})
